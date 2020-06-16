@@ -131,7 +131,8 @@ public class NFCActivity extends AppCompatActivity {
             //Log.d("Encrypted Source: ", "20141683" + nowDate);
             //Log.d("Encrypted Value: ", result);
 
-        } catch (UnsupportedEncodingException | BadPaddingException | IllegalBlockSizeException | InvalidAlgorithmParameterException | InvalidKeyException | NoSuchPaddingException | NoSuchAlgorithmException e) {
+        } catch (UnsupportedEncodingException | BadPaddingException | IllegalBlockSizeException | NullPointerException |
+                InvalidAlgorithmParameterException | InvalidKeyException | NoSuchPaddingException | NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
         return result;
