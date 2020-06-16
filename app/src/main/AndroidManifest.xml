@@ -3,6 +3,7 @@
     package="kr.ac.uck.nfcmodule">
 
     <uses-permission android:name="android.permission.NFC"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
