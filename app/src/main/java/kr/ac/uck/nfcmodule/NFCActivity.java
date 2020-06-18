@@ -44,6 +44,7 @@ public class NFCActivity extends AppCompatActivity {
     private String baseurl = "http://uck.myds.me:7000";
     private String[] NFCdata;
     private String sid = "20141683";
+    private String NFCReadData="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,8 +79,10 @@ public class NFCActivity extends AppCompatActivity {
                 Log.e("TagDispatch",e.toString());
             }
         }
-        binding.text.setText(s);
-        NFCdata=s.split("\n");
+
+        NFCReadData = letsDecrypt(s);
+        binding.text.setText(NFCReadData);
+        NFCdata=NFCReadData.split("\n");
         NFCShuttleService(NFCdata);
 //        for(int i=0; i< NFCdata.length; i++){
 //            Log.d("SplitString",(i+1)+" : " + NFCdata[i]+"\n");
@@ -129,7 +132,7 @@ public class NFCActivity extends AppCompatActivity {
         String result = "";
 
         try {
-            result = AES256Util.AES_Encode(studentId + nowDate);
+            result = AES256Util.AES_Encode(studentId+ nowDate);
             //Log.d("Encrypted Source: ", "20141683" + nowDate);
             //Log.d("Encrypted Value: ", result);
 
@@ -138,5 +141,30 @@ public class NFCActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         return result;
+    }
+
+    private String letsDecrypt(String ReadData){
+        String WriteData="";
+        try{
+            WriteData = AES256Util.AES_Encode("20141683");
+            WriteData = AES256Util.AES_Decode(ReadData);
+        }catch(NullPointerException e){
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (BadPaddingException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (InvalidKeyException e) {
+            e.printStackTrace();
+        } catch (InvalidAlgorithmParameterException e) {
+            e.printStackTrace();
+        } catch (NoSuchPaddingException e) {
+            e.printStackTrace();
+        } catch (IllegalBlockSizeException e) {
+            e.printStackTrace();
+        }
+        return WriteData;
     }
 }

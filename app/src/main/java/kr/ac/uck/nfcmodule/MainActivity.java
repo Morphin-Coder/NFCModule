@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume(){
         super.onResume();
-        if(nfcAdapter!=null){
+        if(nfcAdapter.isEnabled()){
             nfcAdapter.enableForegroundDispatch(this,pendingIntent,mIntentFilters,mNFCTechLists);
         }
     }
@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        if (nfcAdapter != null) {
+        if (nfcAdapter.isEnabled()) {
             nfcAdapter.disableForegroundDispatch(this);
             finish();
         }

@@ -24,7 +24,8 @@ public class AES256Util {
     private static String secretKey = "HUBHUBHUBHUBHUBHUBHUBHUBHUBHUBHU";
 
     //AES256 암호화
-    public static String AES_Encode(String str) throws java.io.UnsupportedEncodingException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, InvalidAlgorithmParameterException, IllegalBlockSizeException, BadPaddingException, NullPointerException {
+    public static String AES_Encode(String str) throws java.io.UnsupportedEncodingException, NoSuchAlgorithmException, NoSuchPaddingException,
+            InvalidKeyException, InvalidAlgorithmParameterException, IllegalBlockSizeException, BadPaddingException, NullPointerException {
 
         String iv = "1234567890123456";
         ivBytes = iv.getBytes();
@@ -40,7 +41,8 @@ public class AES256Util {
     }
 
     //AES256 복호화
-    public static String AES_Decode(String str) throws java.io.UnsupportedEncodingException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, InvalidAlgorithmParameterException, IllegalBlockSizeException, BadPaddingException, NullPointerException {
+    public static String AES_Decode(String str) throws java.io.UnsupportedEncodingException, NoSuchAlgorithmException, NoSuchPaddingException,
+            InvalidKeyException, InvalidAlgorithmParameterException, IllegalBlockSizeException, BadPaddingException, NullPointerException {
 
         byte[] textBytes = Base64.decode(str, 0);
         //byte[] textBytes = str.getBytes("UTF-8");
