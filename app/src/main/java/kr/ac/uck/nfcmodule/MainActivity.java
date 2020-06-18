@@ -29,12 +29,14 @@ public class MainActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this,R.layout.activity_main);
 
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
-        if(nfcAdapter == null){
-            binding.count.setText("NFC가 꺼짐");
-        }
-        else{
+
+        if(nfcAdapter.isEnabled()){
             binding.count.setText("NFC가 켜짐");
         }
+        else{
+            binding.count.setText("NFC가 꺼짐");
+        }
+        Log.d("TAGGING",nfcAdapter.isEnabled()+"");
 
         Intent intent = new Intent(this,NFCActivity.class);
         pendingIntent = PendingIntent.getActivity(this,0,intent,0);

@@ -41,7 +41,7 @@ public class NFCActivity extends AppCompatActivity {
 
     ActivityNfcBinding binding;
     int j;
-    private String baseurl = "https://hub.hsu.ac.kr";
+    private String baseurl = "http://uck.myds.me:7000";
     private String[] NFCdata;
     private String sid = "20141683";
 
@@ -92,12 +92,13 @@ public class NFCActivity extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         String url = letsEncrypt(sid);
+        Log.d("TAGGING",url);
 
         RequestService service = retrofit.create(RequestService.class);
         HashMap<String, Object> input = new HashMap<>();
-        input.put("url", url);/*url*/
-        input.put("state", ReadData[2]);
-        input.put("shuttle_stop_name", ReadData[1]);
+        input.put("url", url);/*url = 학번 + 현재시간 암호화*/
+        input.put("state", ReadData[2]); // 등교/하교
+        input.put("shuttle_stop_name", ReadData[1]); // 캠퍼스
 
         service.shuttleBus(input).enqueue(new Callback<CheckMessage>() {
             @Override
@@ -113,6 +114,7 @@ public class NFCActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<CheckMessage> call, Throwable t) {
+                Log.d("TAGGING",t.getMessage());
                 t.getStackTrace();
             }
         });
